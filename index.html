@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolty | AI Project Architect</title>
+    <meta name="description" content="Transforma tus ideas en proyectos reales con la potencia de Bolty.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="gemini-theme">
+    <!-- Mandatory Login Screen -->
+    <div id="login-screen" class="modal-overlay login-overlay">
+        <div class="login-card">
+            <div class="login-header">
+                <ion-icon name="flash" class="login-logo-icon"></ion-icon>
+                <h2>Bienvenido a Bolty</h2>
+                <p>Identifícate para acceder a la inteligencia de aprendizaje.</p>
+            </div>
+            <form id="login-form" class="login-form">
+                <div class="input-group">
+                    <label for="login-email">Correo Electrónico</label>
+                    <input type="email" id="login-email" placeholder="nombre@ejemplo.com" required>
+                </div>
+                <div class="input-group">
+                    <label for="login-password">Contraseña</label>
+                    <input type="password" id="login-password" placeholder="••••••••" required>
+                </div>
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="login-phone">Teléfono</label>
+                        <input type="tel" id="login-phone" placeholder="+34 600 000 000" required>
+                    </div>
+                    <div class="input-group">
+                        <label for="login-dni">DNI / NIE</label>
+                        <input type="text" id="login-dni" placeholder="12345678X" required>
+                    </div>
+                </div>
+                <button type="submit" class="btn-login">Comenzar a Aprender</button>
+            </form>
+            <p class="login-footer">Tus datos están protegidos por el protocolo Bolty Secure.</p>
+        </div>
+    </div>
+
+    <div id="app" class="app-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <ion-icon name="flash" class="logo-icon"></ion-icon>
+                    <span>Bolty</span>
+                </div>
+                <button id="new-chat-btn" class="btn-new-chat">
+                    <ion-icon name="add-outline"></ion-icon>
+                    <span>Nueva Idea</span>
+                </button>
+            </div>
+            
+            <div class="sidebar-content">
+                <div class="sidebar-section">
+                    <p class="section-title">Recientes</p>
+                    <div id="recent-projects" class="recent-list">
+                        <!-- Dynamic list of recent projects -->
+                        <div class="recent-item empty">No hay proyectos aún</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sidebar-footer">
+                <button id="premium-sidebar-btn" class="btn-sidebar-action">
+                    <ion-icon name="diamond-outline"></ion-icon>
+                    <span>Upgrade Pro</span>
+                </button>
+                <button id="private-sidebar-btn" class="btn-sidebar-action hidden">
+                    <ion-icon name="shield-checkmark-outline"></ion-icon>
+                    <span>Private Node</span>
+                </button>
+                <div class="user-profile">
+                    <div class="avatar">B</div>
+                    <span class="username">Usuario Bolty</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Chat Area -->
+        <main class="main-container">
+            <header class="top-nav">
+                <button id="toggle-sidebar" class="btn-icon-only">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </button>
+                <div class="model-selector" id="model-selector">
+                    <span id="current-mode-label">Apps</span>
+                    <ion-icon name="chevron-down-outline"></ion-icon>
+                    <div class="mode-dropdown hidden" id="mode-dropdown">
+                        <div class="mode-item active" data-mode="apps">
+                            <ion-icon name="apps-outline"></ion-icon>
+                            <span>Apps (Arquitecto)</span>
+                        </div>
+                        <div class="mode-item" data-mode="images">
+                            <ion-icon name="image-outline"></ion-icon>
+                            <span>Imágenes (Generador)</span>
+                        </div>
+                        <div class="mode-item" data-mode="videos">
+                            <ion-icon name="videocam-outline"></ion-icon>
+                            <span>Videos (Cinemática)</span>
+                        </div>
+                        <div class="mode-item" data-mode="code">
+                            <ion-icon name="terminal-outline"></ion-icon>
+                            <span>Código (Senior Dev)</span>
+                        </div>
+                        <div class="mode-item" data-mode="music">
+                            <ion-icon name="musical-notes-outline"></ion-icon>
+                            <span>Música (Genesis)</span>
+                        </div>
+                        <div class="mode-item" data-mode="perfect-apps">
+                            <ion-icon name="sparkles-outline"></ion-icon>
+                            <span>Apps (Perfectas)</span>
+                        </div>
+                        <div class="mode-item" data-mode="real-apps">
+                            <ion-icon name="rocket-outline"></ion-icon>
+                            <span>Apps (Directo)</span>
+                        </div>
+                        <div class="mode-item" data-mode="everything">
+                            <ion-icon name="sparkles-outline"></ion-icon>
+                            <span>Todo (Asistente)</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <div id="chat-scroller" class="chat-scroller">
+                <!-- Welcome View -->
+                <div id="welcome-view" class="welcome-view">
+                    <h1 class="welcome-title">¿Qué quieres <br><span>aprender hoy?</span></h1>
+                    <div class="suggestion-grid">
+                        <div class="suggestion-card" data-prompt="Una app de delivery para huertos urbanos">
+                            <img src="/home/leitou/.gemini/antigravity/brain/d452169d-5402-461c-a5e6-fca69f7430e5/app_garden_icon_1772363363643.png" alt="Huertos">
+                            <p>Delivery para Huertos</p>
+                        </div>
+                        <div class="suggestion-card" data-prompt="Un SaaS de gestión de inventarios con IA">
+                            <img src="/home/leitou/.gemini/antigravity/brain/d452169d-5402-461c-a5e6-fca69f7430e5/saas_inventory_icon_1772363425555.png" alt="Inventarios">
+                            <p>SaaS de Inventarios</p>
+                        </div>
+                        <div class="suggestion-card" data-prompt="Un juego RPG educativo sobre historia">
+                            <img src="/home/leitou/.gemini/antigravity/brain/d452169d-5402-461c-a5e6-fca69f7430e5/rpg_history_icon_1772363439174.png" alt="RPG">
+                            <p>RPG de Historia</p>
+                        </div>
+                        <div class="suggestion-card" data-prompt="Genera una visión futurista de una ciudad inteligente">
+                            <img src="/home/leitou/.gemini/antigravity/brain/d452169d-5402-461c-a5e6-fca69f7430e5/ai_sparkle_icon_1772363452110.png" alt="AI">
+                            <p>Visión Smart City</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chat Messages Container -->
+                <div id="chat-messages" class="chat-messages">
+                    <!-- Messages will be injected here -->
+                </div>
+            </div>
+
+            <!-- Input Area -->
+            <footer class="input-area">
+                <div class="input-container">
+                    <textarea id="idea-input" placeholder="Escribe tu idea aquí..." rows="1"></textarea>
+                    <div class="input-actions">
+                        <button id="attach-btn" class="btn-icon-only" title="Adjuntar (Pro)">
+                            <ion-icon name="add-circle-outline"></ion-icon>
+                        </button>
+                        <button id="generate-btn" class="btn-send" title="Enviar idea">
+                            <ion-icon name="send"></ion-icon>
+                        </button>
+                    </div>
+                </div>
+                <p class="input-disclaimer">Bolty puede cometer errores. Verifica la arquitectura antes de desplegar.</p>
+            </footer>
+        </main>
+
+        <!-- Modals and Overlays (Preserved functionalities) -->
+        <div id="premium-modal" class="modal-overlay hidden">
+            <!-- Content same as original but styled for new theme -->
+            <div class="premium-card">
+                <div class="premium-header">
+                    <ion-icon name="diamond" class="premium-icon"></ion-icon>
+                    <h2>Bolty Premium</h2>
+                    <p>Desbloquea el poder total sin simulaciones.</p>
+                </div>
+                <div class="premium-features">
+                    <div class="p-feature">
+                        <ion-icon name="flash"></ion-icon>
+                        <div>
+                            <h4>IA Pro Instantánea</h4>
+                            <p>Sin esperas, resultados de arquitectura inmediatos.</p>
+                        </div>
+                    </div>
+                    <div class="p-feature">
+                        <ion-icon name="terminal"></ion-icon>
+                        <div>
+                            <h4>Nodo Privado</h4>
+                            <p>Acceso a la terminal sin restricciones de seguridad.</p>
+                        </div>
+                    </div>
+                </div>
+                <button id="buy-premium-btn" class="btn-buy-premium">Activar Plan Pro - $0.00*</button>
+                <button id="close-premium" class="btn-close-modal">Cerrar</button>
+            </div>
+        </div>
+
+        <div id="private-gateway" class="modal-overlay hidden">
+            <div class="private-card">
+                <div class="private-header">
+                    <ion-icon name="finger-print-outline" class="private-icon"></ion-icon>
+                    <h2>Acceso Restringido</h2>
+                    <p>Introduce tu Clave de Enlace Privado.</p>
+                </div>
+                <div class="private-auth">
+                    <input type="password" id="private-pin" placeholder="••••" maxlength="4" autocomplete="off">
+                </div>
+                <button id="auth-private-btn" class="btn-auth-private">Sincronizar</button>
+                <button id="close-gateway" class="btn-close-modal">Abortar</button>
+            </div>
+        </div>
+
+        <!-- Private Version Terminal View -->
+        <div id="private-version" class="private-environment hidden">
+            <header class="private-navbar">
+                <div class="private-logo">
+                    <ion-icon name="terminal-outline"></ion-icon>
+                    <span>BOLTY // PRIVATE_VERSION</span>
+                </div>
+                <button id="exit-private" class="btn-exit-private">Salir</button>
+            </header>
+            <div class="private-content">
+                <div id="private-output" class="private-output"></div>
+                <div class="command-line">
+                    <span class="prompt">PROMPT@BOLTY:~$</span>
+                    <input type="text" id="private-idea-input" placeholder="Comando...">
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Player Modal -->
+        <div id="video-modal" class="video-modal-fullscreen hidden">
+            <div class="video-player-container">
+                <header class="video-player-header">
+                    <div class="video-source-info">
+                        <ion-icon id="modal-source-icon" name="logo-youtube"></ion-icon>
+                        <span id="modal-video-title">Video Title</span>
+                    </div>
+                    <button id="close-video-modal" class="btn-close-video">
+                        <ion-icon name="close-outline"></ion-icon>
+                    </button>
+                </header>
+                <div class="video-content-simulation">
+                    <div class="video-loader">
+                        <ion-icon name="sync-outline" class="spin"></ion-icon>
+                        <span>Cargando buffer de red...</span>
+                    </div>
+                    <img id="modal-video-placeholder" src="" alt="Video Stream">
+                    <div class="video-controls-overlay">
+                        <div class="controls-left">
+                            <ion-icon name="pause-outline"></ion-icon>
+                            <ion-icon name="play-skip-forward-outline"></ion-icon>
+                        </div>
+                        <div class="controls-center">
+                            <div class="video-seek-bar">
+                                <div class="seek-progress"></div>
+                            </div>
+                        </div>
+                        <div class="controls-right">
+                            <ion-icon name="volume-medium-outline"></ion-icon>
+                            <ion-icon name="expand-outline"></ion-icon>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hidden elements for preserving legacy logic if needed -->
+        <div id="loader" class="hidden"></div>
+        <div id="loader-progress" class="hidden"></div>
+        <div id="dev-console" class="hidden"></div>
+    </div>
+
+    <!-- Real Link Access Button -->
+    <button id="real-link-btn" class="floating-access-btn" title="Obtener enlace real de la app">
+        <ion-icon name="link-outline"></ion-icon>
+        <span class="btn-tooltip">Copiar enlace real</span>
+    </button>
+
+    <script src="main.js"></script>
+</body>
+</html>

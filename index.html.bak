@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bolty | De Idea a Proyecto Maestro</title>
+    <meta name="description" content="Transforma tus ideas básicas en proyectos completos y maduros con Bolty.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <!-- Ionicons -->
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="app">
+        <header class="navbar">
+            <div class="logo">
+                <ion-icon name="flash-outline" class="logo-icon"></ion-icon>
+                <span>Bolty</span>
+            </div>
+            <nav>
+                <button id="nav-projects" class="btn-ghost">Proyectos</button>
+                <button id="premium-btn" class="btn-premium-toggle">
+                    <ion-icon name="diamond-outline"></ion-icon>
+                    <span>Go Premium</span>
+                </button>
+                <button id="nav-new" class="btn-primary">Nueva Idea</button>
+            </nav>
+        </header>
+
+        <main class="content-container">
+            <section id="input-section" class="hero-section">
+                <div class="hero-content">
+                    <h1 class="gradient-text">Convierte tu chispa en un <br><span>Proyecto Legendario</span></h1>
+                    <p class="subtitle">Escribe una idea simple. Nosotros daremos el stack, las funciones y el roadmap completo.</p>
+                    
+                    <div class="input-card">
+                        <div class="input-wrapper">
+                            <textarea id="idea-input" placeholder="Ej: Una app para gestionar huertos urbanos con IA..."></textarea>
+                            <button id="generate-btn" class="btn-launch">
+                                <span>Forjar Idea</span>
+                                <ion-icon name="rocket-sharp"></ion-icon>
+                            </button>
+                        </div>
+                        <div class="input-footer">
+                            <div class="tag">#Web</div>
+                            <div class="tag">#Mobile</div>
+                            <div class="tag">#SaaS</div>
+                            <div class="tag">#IA</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-elements">
+                    <div class="blob blob-1"></div>
+                    <div class="blob blob-2"></div>
+                </div>
+            </section>
+
+            <section id="results-section" class="results-section hidden">
+                <div class="results-header">
+                    <button id="back-btn" class="btn-icon-back">
+                        <ion-icon name="arrow-back-outline"></ion-icon>
+                    </button>
+                    <h2 id="project-title" class="project-title">Cargando...</h2>
+                </div>
+
+                <div class="project-grid">
+                    <div class="card glass-card span-2" id="summary-card">
+                        <h3><ion-icon name="document-text-outline"></ion-icon> Resumen Ejecutivo</h3>
+                        <p id="project-summary"></p>
+                    </div>
+
+                    <div class="card glass-card" id="stack-card">
+                        <h3><ion-icon name="layers-outline"></ion-icon> Stack Tecnológico</h3>
+                        <ul id="project-stack"></ul>
+                    </div>
+
+                    <div class="card glass-card" id="features-card">
+                        <h3><ion-icon name="star-outline"></ion-icon> Funcionalidades Clave</h3>
+                        <ul id="project-features"></ul>
+                    </div>
+
+                    <div class="card glass-card span-3" id="roadmap-card">
+                        <h3><ion-icon name="map-outline"></ion-icon> Roadmap de Lanzamiento</h3>
+                        <div id="project-roadmap" class="roadmap-timeline"></div>
+                    </div>
+                </div>
+
+                <div class="action-bar">
+                    <button id="speak-btn" class="btn-action-round" title="Explicar con voz">
+                        <ion-icon name="mic-outline"></ion-icon>
+                    </button>
+                    <button id="start-dev-btn" class="btn-dev">
+                        <ion-icon name="code-working-outline"></ion-icon>
+                        <span>Conectar Agente</span>
+                    </button>
+                    <button id="save-btn" class="btn-action-round" title="Guardar Proyecto">
+                        <ion-icon name="save-outline"></ion-icon>
+                    </button>
+                </div>
+            </section>
+        </main>
+
+        <!-- Development Console Overlay -->
+        <div id="dev-console" class="console-overlay hidden">
+            <div class="console-container">
+                <div class="console-header">
+                    <div class="circles">
+                        <span class="circle red"></span>
+                        <span class="circle yellow"></span>
+                        <span class="circle green"></span>
+                    </div>
+                    <div class="console-title">Agente de Programación v1.0</div>
+                    <button id="close-console" class="btn-close-console">
+                        <ion-icon name="close-outline"></ion-icon>
+                    </button>
+                </div>
+                <div id="console-body" class="console-body">
+                    <div class="line">Connecting to local development node...</div>
+                </div>
+                <div class="console-footer">
+                    <span class="status-dot"></span>
+                    <span id="agent-status">Agente en línea</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="loader" class="loader-overlay hidden">
+            <div class="loader-content">
+                <div class="spinner"></div>
+                <p>Forjando arquitectura...</p>
+                <div class="progress-bar"><div id="loader-progress" class="progress"></div></div>
+            </div>
+        </div>
+
+        <div id="premium-modal" class="modal-overlay hidden">
+            <div class="premium-card">
+                <div class="premium-header">
+                    <ion-icon name="diamond" class="premium-icon"></ion-icon>
+                    <h2>Bolty Premium</h2>
+                    <p>Desbloquea el poder total de la IA sin límites.</p>
+                </div>
+                <div class="premium-features">
+                    <div class="p-feature">
+                        <ion-icon name="flash"></ion-icon>
+                        <div>
+                            <h4>IA Pro Sin Simulaciones</h4>
+                            <p>Generación instantánea y ultra-detallada.</p>
+                        </div>
+                    </div>
+                    <div class="p-feature">
+                        <ion-icon name="terminal"></ion-icon>
+                        <div>
+                            <h4>Consola Desbloqueada</h4>
+                            <p>Ejecuta cualquier comando y despliega al instante.</p>
+                        </div>
+                    </div>
+                    <div class="p-feature">
+                        <ion-icon name="infinite"></ion-icon>
+                        <div>
+                            <h4>Proyectos Ilimitados</h4>
+                            <p>Sin restricciones de forjado.</p>
+                        </div>
+                    </div>
+                </div>
+                <button id="buy-premium-btn" class="btn-buy-premium">Activar Plan Pro - $0.00*</button>
+                <p class="modal-note">*Versión de prueba gratuita activada</p>
+                <button id="close-premium" class="btn-close-modal">Cerrar</button>
+            </div>
+        </div>
+
+        <div id="private-gateway" class="modal-overlay hidden">
+            <div class="private-card">
+                <div class="private-header">
+                    <ion-icon name="finger-print-outline" class="private-icon"></ion-icon>
+                    <h2>Acceso Restringido</h2>
+                    <p>Introduce tu Clave de Enlace Privado para continuar.</p>
+                </div>
+                <div class="private-auth">
+                    <input type="password" id="private-pin" placeholder="••••" maxlength="4">
+                    <div class="pin-hint">Pista: El código es '0000' para desarrolladores</div>
+                </div>
+                <button id="auth-private-btn" class="btn-auth-private">Sincronizar con el Nodo Privado</button>
+                <button id="close-gateway" class="btn-close-modal">Abortar</button>
+            </div>
+        </div>
+
+        <div id="private-version" class="private-environment hidden">
+            <header class="private-navbar">
+                <div class="private-logo">
+                    <ion-icon name="terminal-outline"></ion-icon>
+                    <span>BOLTY // PRIVATE_VERSION</span>
+                </div>
+                <div class="private-status">
+                    <span class="pulse-dot"></span> SECURE_CONNECTION: ACTIVE
+                </div>
+                <button id="exit-private" class="btn-exit-private">Salir del Nodo</button>
+            </header>
+            
+            <div class="private-content">
+                <div class="command-input-area">
+                    <div class="prompt">PROMPT@BOLTY:~$</div>
+                    <textarea id="private-idea-input" placeholder="Dime cualquier cosa. No tengo límites..."></textarea>
+                    <button id="private-generate-btn" class="btn-private-launch">
+                        <ion-icon name="skull-outline"></ion-icon> Ejecutar
+                    </button>
+                </div>
+
+                <div id="private-output" class="private-output-grid hidden">
+                    <div class="output-card terminal-card span-3">
+                        <div class="card-title">RESULTADO_DEL_ANALISIS_PROFUNDO</div>
+                        <div id="private-response" class="typewriter-text"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <footer class="main-footer">
+            <p>&copy; 2026 Bolty Studio. Created with &hearts; for creators.</p>
+        </footer>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
